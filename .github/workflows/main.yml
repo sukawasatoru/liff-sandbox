@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        shell: bash -l -euo pipefail {0}
+        shell: bash -l -eo pipefail {0}
     steps:
       - uses: actions/checkout@v2
       - name: Build
