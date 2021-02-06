@@ -27,8 +27,12 @@ jobs:
       - name: Publish
         env:
           PATH_CONTEXT: /liff-sandbox
-        working-directory: out
         run: |
+          rm -rf out
+          nvm use
+          npm ci
+          npm run export
+          cd out
           git init
           git add .
           git -c user.name='ci' -c user.email='ci' commit -m 'Deploy LIFF Application'
