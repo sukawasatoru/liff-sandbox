@@ -11,10 +11,12 @@ jobs:
   build:
     # https://github.com/actions/virtual-environments#available-environments
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l -eo pipefail {0}
     steps:
       - uses: actions/checkout@v2
       - name: Build
-        shell: bash -l {0}
         run: |
           nvm install $(cat .nvmrc)
           nvm use
