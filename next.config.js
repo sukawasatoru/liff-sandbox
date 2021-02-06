@@ -18,9 +18,10 @@
 
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
-module.exports = {
+const config = {
   poweredByHeader: false,
   reactStrictMode: true,
+  // https://github.com/vercel/next.js/blob/5201cdb/packages/next/export/index.ts#L382
   webpack: (config, options) => {
     if (options.isServer) {
       config.plugins.push(
@@ -38,3 +39,11 @@ module.exports = {
     return config;
   },
 };
+
+const pathContext = process.env.PATH_CONTEXT;
+if (pathContext) {
+  config.assetPrefix = pathContext;
+  config.basePath = pathContext;
+}
+
+module.exports = config;

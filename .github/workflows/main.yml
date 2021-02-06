@@ -25,6 +25,8 @@ jobs:
           name: artifact
           path: out
       - name: Publish
+        env:
+          PATH_CONTEXT: /liff-sandbox
         working-directory: out
         run: |
           git init
