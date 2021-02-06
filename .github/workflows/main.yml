@@ -1,0 +1,31 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+env:
+  CARGO_TERM_COLOR: always
+jobs:
+  build:
+    # https://github.com/actions/virtual-environments#available-environments
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          nvm use
+          npm export
+      - uses: actions/upload-artifact@v2
+        with:
+          name: artifact
+          path: out
+      - name: Publish
+        run: |
+          cd out
+          git init
+          git add .
+          git -c user.name='ci' -c user.email='ci' commit -m 'Deploy LIFF Application'
+          git push -f -q https://git:${{ secrets.github_token }}@github.com/${{ github.repository }} HEAD:gh-pages
+        if: github.event_name == 'push' && github.event.ref == 'refs/heads/master' && github.repository == 'sukawasatoru/liff-sandbox'
