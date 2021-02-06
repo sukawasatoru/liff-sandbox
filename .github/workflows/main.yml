@@ -16,6 +16,7 @@ jobs:
       - name: Build
         shell: bash -l {0}
         run: |
+          nvm install $(cat .nvmrc)
           nvm use
           npm export
       - uses: actions/upload-artifact@v2
