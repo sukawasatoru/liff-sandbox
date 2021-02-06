@@ -25,6 +25,7 @@ jobs:
           name: artifact
           path: out
       - name: Publish
+        shell: bash -l -eo pipefail {0}
         env:
           PATH_CONTEXT: /liff-sandbox
         run: |
