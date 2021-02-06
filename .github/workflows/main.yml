@@ -12,7 +12,8 @@ jobs:
     # https://github.com/actions/virtual-environments#available-environments
     runs-on: ubuntu-latest
     defaults:
-      shell: bash
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v2
       - name: Build
