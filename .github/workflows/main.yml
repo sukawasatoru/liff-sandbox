@@ -33,6 +33,7 @@ jobs:
           nvm use
           npm ci
           npm run export
+          touch out/.nojekyll
           cd out
           git init
           git add .
